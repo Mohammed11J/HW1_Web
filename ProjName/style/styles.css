@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light Mode */
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  background-color: #ffffff;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border-radius: 8px;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+#theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#theme-icon {
+  color: #333;
+  transition: color 0.3s;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.container.dark-mode {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+#quiz-content.dark-mode,
+#responses.dark-mode,
+#quiz-form.dark-mode,
+#alert-content.dark-mode {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="number"],
+body.dark-mode select {
+  background-color: #3a3a3a;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+button.toggle-button.dark-mode {
+  background-color: #6a9eea;
+  color: #333;
+}
+
+body.dark-mode #theme-icon {
+  color: #f0f0f0;
+}
+
+#alert-content {
+  background-color: #ffffff;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode #alert-content {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body,
+.container,
+button.toggle-button,
+#quiz-content,
+#quiz-form,
+#responses,
+#alert-content,
+input[type="text"],
+input[type="number"],
+select {
+  transition: background-color 0.3s, color 0.3s;
+}
