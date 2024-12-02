@@ -16,6 +16,7 @@ body {
   color: #333;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
   border-radius: 8px;
+  padding-top: 80px; /* Adjust to match the nav height */
 }
 
 /* Theme Toggle Button */
@@ -65,6 +66,7 @@ nav {
   color: #1d4ed8;
   text-decoration: none;
   transition: color 0.3s, transform 0.3s;
+  white-space: nowrap; /* Prevent wrapping of links */
 }
 
 .nav-link:hover {
@@ -78,6 +80,13 @@ body.dark .nav-link {
 
 body.dark .nav-link:hover {
   color: #93c5fd;
+}
+
+@media (max-width: 300px) {
+  nav .flex {
+    flex-direction: column;
+    align-items: center; /* Center items on small screens */
+  }
 }
 
 /* Centering Buttons */
@@ -134,10 +143,21 @@ select {
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+.removebtn {
+  color: #f56565; /* Tailwind equivalent: text-red-500 */
+  background-color: transparent;
+  padding: 0.5rem 1rem; /* Tailwind equivalent: px-4 py-2 */
+  border: 1px solid #f56565; /* Tailwind equivalent: border border-red-500 */
+  border-radius: 0.25rem; /* Tailwind equivalent: rounded */
+  transition: all 0.3s ease-in-out; /* Tailwind equivalent: transition duration-300 ease-in-out */
+}
 
-/* Responsive Adjustments */
-@media (max-width: 767px) {
-  .nav-link {
-    margin: 0;
-  }
+.removebtn:hover {
+  color: #c53030; /* Tailwind equivalent: hover:text-red-700 */
+  background-color: #ffe4e4; /* Tailwind equivalent: hover:bg-red-100 */
+}
+
+.removebtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.5); /* Tailwind equivalent: focus:ring focus:ring-red-500 */
 }

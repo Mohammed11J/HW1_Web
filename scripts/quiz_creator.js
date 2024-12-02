@@ -24,13 +24,29 @@ function createQuestionDiv(q, index) {
     headerDiv.appendChild(questionNumber);
 
     const removeButton = document.createElement('button');
-    removeButton.className = 'text-red-500 hover:text-red-700';
-    removeButton.textContent = 'Remove';
+    removeButton.className = 'removebtn'; // Use the custom class
+    removeButton.innerHTML = '<i class="fas fa-trash"></i>'; // Trash icon for better UI
+    removeButton.setAttribute('aria-label', 'Remove question');
+    removeButton.setAttribute('title', 'Click to remove this question');
+    removeButton.setAttribute('role', 'button');
+    
+    // Attach the click event listener
     removeButton.addEventListener('click', () => {
-        questions.splice(index, 1);
-        initializeQuizForm();
+        const confirmDelete = confirm('Are you sure you want to remove this question?');
+        if (confirmDelete) {
+            if (typeof index === 'number' && index >= 0 && index < questions.length) {
+                questions.splice(index, 1); // Remove the question
+                initializeQuizForm(); // Re-render the form
+            } else {
+                console.error('Invalid index:', index);
+            }
+        }
     });
+    
+    // Append the button to the header div
     headerDiv.appendChild(removeButton);
+    
+    
     questionDiv.appendChild(headerDiv);
 
     const questionTextLabel = document.createElement('label');
@@ -291,19 +307,18 @@ document.getElementById('save-quiz').addEventListener('click', () => {
     console.log('Quiz saved:', questions);
     
     const currentUrl = window.location.href;
-
     const quizParticipantUrl = currentUrl.replace('quiz_creator.html', 'quiz_participant.html');
 
+    // Create the backdrop with dark overlay
     const alertBox = document.createElement('div');
-    alertBox.className = 'fixed inset-0 flex items-center justify-center';
+    alertBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
     
-    const darkModeClass = document.body.classList.contains('dark-mode') ? 'dark-mode' : '';
-    
+    // Create the modal content without dynamic darkModeClass
     alertBox.innerHTML = `
-        <div id="alert-content" class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-8 rounded-lg shadow-lg max-w-md w-full text-center relative ${darkModeClass}">
+        <div id="alert-content" class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-8 rounded-lg shadow-lg max-w-md w-full text-center relative">
             <h2 class="text-2xl font-bold mb-4">Quiz Saved Successfully!</h2>
             <p class="mb-3">You can access the quiz here:</p>
-            <a href="${quizParticipantUrl}" target="_blank" id="quiz-link" class="text-blue-500 dark:text-blue-400 underline">${quizParticipantUrl}</a>
+            <a href="${quizParticipantUrl}" target="_blank" id="quiz-link" class="text-blue-500 dark:text-blue-400 underline break-all">${quizParticipantUrl}</a>
             <div class="flex justify-center mt-6">
                 <button id="copy-link" class="mr-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Copy Link</button>
                 <button id="close-alert" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition duration-300">Close</button>
@@ -312,18 +327,32 @@ document.getElementById('save-quiz').addEventListener('click', () => {
     `;
     document.body.appendChild(alertBox);
 
+    // Event listener for "Copy Link" button
     document.getElementById('copy-link').addEventListener('click', () => {
         navigator.clipboard.writeText(quizParticipantUrl).then(() => {
-            alert('Quiz link copied to clipboard!');
+            // Optional: Show a temporary confirmation message
+            const copyConfirmation = document.createElement('div');
+            copyConfirmation.className = 'absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded';
+            copyConfirmation.innerText = 'Copied!';
+            document.getElementById('alert-content').appendChild(copyConfirmation);
+            setTimeout(() => {
+                copyConfirmation.remove();
+            }, 2000);
         }).catch((err) => {
             console.error('Failed to copy: ', err);
+            alert('Failed to copy the link. Please try manually.');
         });
     });
 
+    // Event listener for "Close" button
     document.getElementById('close-alert').addEventListener('click', () => {
         alertBox.remove();
     });
+
+    // Optional: Close modal when clicking outside the modal content
+    alertBox.addEventListener('click', (e) => {
+        if (e.target === alertBox) {
+            alertBox.remove();
+        }
+    });
 });
-
-
-
