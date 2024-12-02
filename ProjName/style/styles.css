@@ -1,8 +1,9 @@
+/* Tailwind Base Styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Light Mode */
+/* Base Styles */
 body {
   background-color: #f9f9f9;
   color: #333;
@@ -17,19 +18,18 @@ body {
   border-radius: 8px;
 }
 
+/* Theme Toggle Button */
 #theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background-color: transparent;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
 }
 
 #theme-toggle:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.2);
 }
 
 #theme-icon {
@@ -37,26 +37,93 @@ body {
   transition: color 0.3s;
 }
 
-/* Dark Mode */
-body.dark-mode {
+body.dark #theme-icon {
+  color: #f0f0f0;
+}
+
+/* Dark Mode Styles */
+body.dark {
   background-color: #121212;
   color: #f0f0f0;
 }
 
-.container.dark-mode {
+body.dark .container {
   background-color: #2a2a2a;
   color: #f0f0f0;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 
-#quiz-content.dark-mode,
-#responses.dark-mode,
-#quiz-form.dark-mode,
-#alert-content.dark-mode {
-  background-color: #2a2a2a;
-  color: #e0e0e0;
+/* Navigation Bar Styling */
+/* Remove conflicting styles */
+nav {
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.nav-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1d4ed8;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.nav-link:hover {
+  color: #2563eb;
+  transform: scale(1.1);
+}
+
+body.dark .nav-link {
+  color: #60a5fa;
+}
+
+body.dark .nav-link:hover {
+  color: #93c5fd;
+}
+
+/* Centering Buttons */
+.centered-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Button Hover Effect */
+button {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Adjustments for Specific Elements */
+body.dark input[type="text"],
+body.dark input[type="number"],
+body.dark select {
+  background-color: #3a3a3a;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+body.dark button.toggle-button {
+  background-color: #6a9eea;
+  color: #333;
+}
+
+body.dark #alert-content {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body.dark nav {
+  background-color: #2a2a2a;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Form Inputs */
 input[type="text"],
 input[type="number"],
 select {
@@ -68,48 +135,9 @@ select {
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-body.dark-mode input[type="text"],
-body.dark-mode input[type="number"],
-body.dark-mode select {
-  background-color: #3a3a3a;
-  color: #f0f0f0;
-  border-color: #555;
-}
-
-button.toggle-button.dark-mode {
-  background-color: #6a9eea;
-  color: #333;
-}
-
-body.dark-mode #theme-icon {
-  color: #f0f0f0;
-}
-
-#alert-content {
-  background-color: #ffffff;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 600px;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-body.dark-mode #alert-content {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-body,
-.container,
-button.toggle-button,
-#quiz-content,
-#quiz-form,
-#responses,
-#alert-content,
-input[type="text"],
-input[type="number"],
-select {
-  transition: background-color 0.3s, color 0.3s;
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .nav-link {
+    margin: 0;
+  }
 }
