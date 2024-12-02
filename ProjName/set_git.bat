@@ -1,4 +1,4 @@
-echo "# WEB-PROJECT-GROUP2" >> README.md
+echo "# Web-Project-Group22" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
